@@ -125,6 +125,7 @@ def main():
     choice = st.sidebar.selectbox("Menu", menu)
     session_state = SessionState.get(user_logged_in = False, user_id = "", state = "Start", history=0)
     icon_info = np.load("./Scripts/icon_info1.npy", allow_pickle=True)
+    #icon_info = np.load("icon_info1.npy", allow_pickle=True)
 
     st.title("Draw the sketch!")
     st.markdown(' ')
