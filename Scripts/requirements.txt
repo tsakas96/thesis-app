@@ -1,6 +1,6 @@
 pandas==1.2.4
 Pillow==8.2.0
-streamlit==0.65.0
+streamlit==0.80.0
 streamlit-drawable-canvas==0.6.0
 Pyrebase
 firebase-admin
