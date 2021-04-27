@@ -42,6 +42,16 @@ class SessionState(object):
         for key, val in kwargs.items():
             setattr(self, key, val)
 
+def _get_session():
+    session_id = ReportThread.get_report_ctx().session_id
+    print(session_id)
+    session_info = Server.get_current()._get_session_info(session_id)
+
+    if session_info is None:
+        raise RuntimeError("Couldn't get your Streamlit Session object.")
+    
+    return session_info.session
+
 
 def get(**kwargs):
     """Gets a SessionState object for the current session.
@@ -65,23 +75,7 @@ def get(**kwargs):
     >>> session_state.user_name
     'Mary'
     """
-    # Hack to get the session object from Streamlit.
-
-    ctx = ReportThread.get_report_ctx()
-
-    this_session = None
-
-    current_server = Server.get_current()
-    if hasattr(current_server, '_session_infos'):
-        # Streamlit < 0.56
-        session_infos = Server.get_current()._session_info_by_id.values()
-    else:
-        session_infos = Server.get_current()._session_info_by_id.values()
-
-    for session_info in session_infos:
-        s = session_info.session
-        if s.id == ctx.session_id:
-            this_session = s
+    this_session = _get_session()
 
     if this_session is None:
         raise RuntimeError(
