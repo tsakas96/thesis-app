@@ -70,12 +70,12 @@ def display_timer_and_icon(session_state, icon_path):
     seconds = 0
     
     icon = st.empty()
-    timer_text.markdown(str(5 - seconds))
-    while seconds < 5:
+    timer_text.markdown(str(10 - seconds))
+    while seconds < 10:
         if time.time() - start_time >= 1:
             start_time = time.time()
             seconds = seconds + 1
-            timer_text.markdown(str(5 - seconds))
+            timer_text.markdown(str(10 - seconds))
         icon.image(download_image(icon_path))
         
 
